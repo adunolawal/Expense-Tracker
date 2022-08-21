@@ -1,0 +1,17 @@
+[
+    {
+        "id": 1,
+        "title": "Groceries",
+        "amount" : 300
+    },
+    {
+        "id": 2,
+        "title": "Salary",
+        "amount" : 300
+    },
+    {
+        "id": 3,
+        "title": "Book",
+        "amount" : 300
+    }
+]
