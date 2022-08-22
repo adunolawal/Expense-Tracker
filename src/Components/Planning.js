@@ -88,12 +88,12 @@ const Planning = () => {
                           name="amount"
                           onChange={handleAddition}
                         placeholder="Enter the amount" ></input>
-                        <div ref={radiosWrapper}>
+                        <div ref={radiosWrapper} >
                            <label className="radi"  > 
-                                <input type="radio" required className="hey" key={1} checked={checked === "Income"} onChange={()=> changeHandler("Income") } name="income" /> Income 
+                                <input type="radio" className="hey" key={1} checked={checked === "Income"} onChange={()=> changeHandler("Income") } name="income" /> Income 
                             </label>
                             <label className="radi" > 
-                                <input type="radio"  required className="hey"key={2} checked={checked === "expense"} onChange={()=> changeHandler("expense") } name="expense" />Expenses
+                                <input type="radio" className="hey"key={2} checked={checked === "expense"} onChange={()=> changeHandler("expense") } name="expense" />Expenses
                             </label>
                         </div>
                         <button onSubmit={handleSubmit}>Add transaction</button>
