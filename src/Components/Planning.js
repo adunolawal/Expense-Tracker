@@ -38,14 +38,17 @@ const Planning = () => {
         const checkedInput = radiosWrapper.current.querySelector('input:checked');
             if(checkedInput.name === "income"){
                 const inc = income + inputAmount
+                const priceAdd = inputAmount + price
+                setPrice(priceAdd)
                 setIncome(inc)
             }
             else if(checkedInput.name === "expense"){
-                const exp = expense + inputAmount
+                const exp = expense + inputAmount  
+                const nowtotal = price - inputAmount  
                 setExpense(exp)
+                setPrice(nowtotal)
             }
-        const priceAdd = inputAmount + price
-        setPrice(priceAdd)
+
     }
     const changeHandler = ( item) => {   
         item === checked ? setChecked(null) : setChecked(item)
