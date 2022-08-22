@@ -6,8 +6,8 @@ const Planning = () => {
     const [income,setIncome] = useState(100);
     const [expense,setExpense] = useState(200);
     const [price,setPrice] = useState(500);
-    // const [error, setError] = useState("");
     const radiosWrapper = useRef();
+    const [checked, setChecked] = useState(null)
 
     const [addData, setAddData] = useState({
         text : '',
@@ -36,20 +36,19 @@ const Planning = () => {
         const inputAmount = Number(`${addData.amount}`)
         
         const checkedInput = radiosWrapper.current.querySelector('input:checked');
-      
-        if(checkedInput.name === "income"){
-            const inc = income + inputAmount
-            setIncome(inc)
-        }
-        else if(checkedInput.name === "expense"){
-            const exp = expense + inputAmount
-            setExpense(exp)
-        }
-        //  else if(checkedInput.name === "income" && checkedInput.name === "expense" ){
-        //     setError("You checked in two things")
-        // }
+            if(checkedInput.name === "income"){
+                const inc = income + inputAmount
+                setIncome(inc)
+            }
+            else if(checkedInput.name === "expense"){
+                const exp = expense + inputAmount
+                setExpense(exp)
+            }
         const priceAdd = inputAmount + price
         setPrice(priceAdd)
+    }
+    const changeHandler = ( item) => {   
+        item === checked ? setChecked(null) : setChecked(item)
     }
 
     return ( 
@@ -78,7 +77,6 @@ const Planning = () => {
 
            <div className="form">
                 <h2>Add new transaction</h2>
-               {/* <h5> {error}</h5> */}
                 <div className="form2">
                     <form onSubmit={handleSubmit} >
                         <label> Title </label> <br></br>
@@ -91,11 +89,11 @@ const Planning = () => {
                           onChange={handleAddition}
                         placeholder="Enter the amount" ></input>
                         <div ref={radiosWrapper}>
-                           <label className="radi" > 
-                                <input type="radio" className="hey" key={1} name="income" /> Income 
+                           <label className="radi"  > 
+                                <input type="radio" className="hey" key={1} checked={checked === "Income"} onChange={()=> changeHandler("Income") } name="income" /> Income 
                             </label>
                             <label className="radi" > 
-                                <input type="radio"  className="hey"key={2}  name="expense" />Expenses
+                                <input type="radio"  className="hey"key={2} checked={checked === "expense"} onChange={()=> changeHandler("expense") } name="expense" />Expenses
                             </label>
                         </div>
                         <button onSubmit={handleSubmit}>Add transaction</button>
