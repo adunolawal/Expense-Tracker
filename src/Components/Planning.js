@@ -80,20 +80,20 @@ const Planning = () => {
                 <div className="form2">
                     <form onSubmit={handleSubmit} >
                         <label> Title </label> <br></br>
-                        <input type="text"   name="title" className="forum"
+                        <input type="text"   name="title" className="forum" required
                         onChange={handleAddition}
                          placeholder="Enter the title"></input> <br></br>
                         <label> Amount </label> <br></br>
-                        <input type="text" className="forum"
+                        <input type="text" className="forum" required
                           name="amount"
                           onChange={handleAddition}
                         placeholder="Enter the amount" ></input>
                         <div ref={radiosWrapper}>
                            <label className="radi"  > 
-                                <input type="radio" className="hey" key={1} checked={checked === "Income"} onChange={()=> changeHandler("Income") } name="income" /> Income 
+                                <input type="radio" required className="hey" key={1} checked={checked === "Income"} onChange={()=> changeHandler("Income") } name="income" /> Income 
                             </label>
                             <label className="radi" > 
-                                <input type="radio"  className="hey"key={2} checked={checked === "expense"} onChange={()=> changeHandler("expense") } name="expense" />Expenses
+                                <input type="radio"  required className="hey"key={2} checked={checked === "expense"} onChange={()=> changeHandler("expense") } name="expense" />Expenses
                             </label>
                         </div>
                         <button onSubmit={handleSubmit}>Add transaction</button>
