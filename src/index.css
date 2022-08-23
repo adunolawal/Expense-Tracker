@@ -45,6 +45,7 @@ body {
   border-radius: 10px;
   text-decoration: none;
   margin-left: -2.5rem;
+  display: flex;
 }
 .form2 {
   border: 1px solid;
@@ -72,9 +73,19 @@ body {
   padding: 0.3rem;
   margin-top: 0.5rem;
   margin-left: 1rem;
+  cursor: pointer;
 }
 .radi{
   text-align: left;
   margin-bottom: 5px;
   font-size: 20px;
+  cursor: pointer;
+}
+.delete{
+  margin-left: auto;
+  cursor: pointer;
+  border: 1px solid;
+}
+.amount{
+  margin-left: 3rem;
 }

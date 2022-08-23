@@ -1,5 +1,6 @@
 import React, { useState, useRef } from "react";
 import data from "./data/profile.json"
+import Form from "./Form";
 
 const Planning = () => {
     const [expenses, setExpenses] = useState(data);
@@ -8,7 +9,6 @@ const Planning = () => {
     const [price,setPrice] = useState(500);
     const radiosWrapper = useRef();
     const [checked, setChecked] = useState(null)
-
     const [addData, setAddData] = useState({
         text : '',
         amount : '', 
@@ -40,7 +40,7 @@ const Planning = () => {
                 const inc = income + inputAmount
                 const priceAdd = inputAmount + price
                 setPrice(priceAdd)
-                setIncome(inc)
+                setIncome(inc) 
             }
             else if(checkedInput.name === "expense"){
                 const exp = expense + inputAmount  
@@ -48,16 +48,25 @@ const Planning = () => {
                 setExpense(exp)
                 setPrice(nowtotal)
             }
-
+        e.target.reset();
+        
     }
-    const changeHandler = ( item) => {   
-        item === checked ? setChecked(null) : setChecked(item)
+
+    const changeHandler = (item) => {   
+        item === checked ? setChecked(null) : setChecked(item)   
+    }
+
+    const handleDelete = (id) =>{
+        const deleteit = [...expenses]
+        const index = expenses.findIndex((i)=> i.id === id)
+        deleteit.splice(index,1)
+        setExpenses(deleteit)
     }
 
     return ( 
         <div>
             <p>YOUR BALANCE</p>
-            <h2>$ {price} </h2>
+            <h2> ${price} </h2>
             <div className="inexp">
                 <div className="income" >
                     <span>INCOME</span>
@@ -73,39 +82,23 @@ const Planning = () => {
                 <p>History</p> <hr></hr>
                 <ul>
                     {expenses.map((expense, id) => {
-                      return <li key={id}>{expense.title} <span> ${expense.amount}</span> </li>
+                      return <li key={id}>{expense.title} 
+                    <span className="amount"> ${expense.amount}</span>
+                    <span className="delete" onClick={()=>handleDelete(expense.id)}>❌</span> 
+                    </li>
                     })}
                 </ul>
            </div>
 
-           <div className="form">
-                <h2>Add new transaction</h2>
-                <div className="form2">
-                    <form onSubmit={handleSubmit} >
-                        <label> Title </label> <br></br>
-                        <input type="text"   name="title" className="forum" required
-                        onChange={handleAddition}
-                         placeholder="Enter the title"></input> <br></br>
-                        <label> Amount </label> <br></br>
-                        <input type="text" className="forum" required
-                          name="amount"
-                          onChange={handleAddition}
-                        placeholder="Enter the amount" ></input>
-                        <div ref={radiosWrapper} >
-                           <label className="radi"  > 
-                                <input type="radio" className="hey" key={1} checked={checked === "Income"} onChange={()=> changeHandler("Income") } name="income" /> Income 
-                            </label>
-                            <label className="radi" > 
-                                <input type="radio" className="hey"key={2} checked={checked === "expense"} onChange={()=> changeHandler("expense") } name="expense" />Expenses
-                            </label>
-                        </div>
-                        <button onSubmit={handleSubmit}>Add transaction</button>
-                    </form>
-                </div>
-           </div>
+           <Form handleSubmit={handleSubmit} 
+                handleAddition={handleAddition}
+                changeHandler={changeHandler}
+                checked={checked}
+                radiosWrapper={radiosWrapper}
+            ></Form>
+
         </div>
     );
 }
-
 
 export default Planning ;
